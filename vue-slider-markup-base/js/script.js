@@ -8,6 +8,7 @@ createApp({
   data() {
     return {
       currentImg: 0,
+      active: 'active',
       slides:
         [
             {
@@ -59,7 +60,7 @@ createApp({
             this.currentImg = 0
             
         }
-    }
+    },
   }
 
 
