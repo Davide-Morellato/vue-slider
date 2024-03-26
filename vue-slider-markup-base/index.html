@@ -17,22 +17,38 @@
         <div class="container">
             <div class="slider-wrapper" tabindex="0">
 
+                <!-- prendo la singola immagine nell'array di oggetti "slides" in Js
+                mediante la chiave in data "currentImg" a cui è stato assegnato 0 come
+                valore di partenza (che corrisponde all'indice di riferimento) -->
+
                 <div class="item">
-                    <img src="img/01.webp" alt="Spiderman" />
+                    <img v-bind:src="slides[currentImg].image" alt="Spiderman" />
                     <div class="text">
-                        <h3>Spiderman</h3>
+                        <h3>
+                            <!-- assegno ad ogni image selezionata il rispettivo titolo -->
+                            {{slides[currentImg].title}}
+                        </h3>
                         <p>
-                            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Et temporibus voluptatum suscipit
-                            tempore aliquid deleniti aut
-                            veniam inventore eligendi ex ad ullam, cumque provident totam omnis, magnam dolores dolorum
-                            corporis.
+                            <!-- assegno ad ogni image selezionata la rispettiva descrizione -->
+                            {{slides[currentImg].text}}
                         </p>
                     </div>
                 </div>
 
                 <div class="thumbs">
-                    <div class="prev"></div>
-                    <div class="next"></div>
+                    
+                    <!-- assegno l'eventListener "@click" allo pseudo-pulsante per indicare di scorrere l'image -->
+                    <!-- <div class="prev" @click="currentImg--"></div> -->
+
+                    <!-- applico la funzione creata in methods in Js [successivo a data()]-->
+                    <div class="prev" @click="prev()"></div>
+
+                    <!-- assegno l'eventListener "@click" allo pseudo-pulsante per indicare di scorrere l'image -->
+                    <!-- <div class="next" @click="currentImg++"></div> -->
+
+                    <!-- applico la funzione creata in methods in Js [successivo a data()]-->
+                    <div class="next" @click="next()"></div>
+
                     <div class="thumb active">
                         <img src="img/01.webp" alt="Svezia" />
                     </div>
