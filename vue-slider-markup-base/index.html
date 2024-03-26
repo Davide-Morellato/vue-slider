@@ -18,8 +18,8 @@
             <div class="slider-wrapper" tabindex="0">
 
                 <!-- prendo la singola immagine nell'array di oggetti "slides" in Js
-                mediante la chiave in data "currentImg" a cui è stato assegnato 0 come
-                valore di partenza (che corrisponde all'indice di riferimento) -->
+                     mediante la chiave in data "currentImg" a cui è stato assegnato 0 come
+                     valore di partenza (che corrisponde all'indice di riferimento) -->
 
                 <div class="item">
                     <img v-bind:src="slides[currentImg].image" alt="Spiderman" />
@@ -35,21 +35,39 @@
                     </div>
                 </div>
 
-                <div class="thumbs">
+                <!-- assegno l'evento al passaggio del mouse (@mouseover/@mouseleave)
+                     per far scorrere in autoplay e bloccare le immagini -->
+                <div class="thumbs"
+                    @mouseover="stopCarousel()"  
+                    @mouseleave="startCarousel()"
+                >
                     
                     <!-- assegno l'eventListener "@click" allo pseudo-pulsante per indicare di scorrere l'image -->
                     <!-- <div class="prev" @click="currentImg--"></div> -->
 
                     <!-- applico la funzione creata in methods in Js [successivo a data()]-->
-                    <div class="prev" @click="prev()"></div>
+                    <div class="prev" v-on:click="prev()"></div>
 
                     <!-- assegno l'eventListener "@click" allo pseudo-pulsante per indicare di scorrere l'image -->
                     <!-- <div class="next" @click="currentImg++"></div> -->
 
                     <!-- applico la funzione creata in methods in Js [successivo a data()]-->
                     <div class="next" @click="next()"></div>
+                    
+                    <!-- creo un div in cui inserire le immagini prese dall'array "slides" 
+                         indico che al click sull'immagine della thumb essa cambi 
+                         assegno/rimuovo la classe active al cambio dell'immagine (riquadro)
+                         applico la direttiva v-for per visualizzare le immagini dell' array -->
+                    <div class="thumb"
+                        @click="currentImg = i"
+                        :class="currentImg === i ? 'active' : ''"
+                        v-for="(img, i) in slides"    
+                    >
+                        <img v-bind:src="img.image" alt="">
+                    </div>
 
-                    <div class="thumb">  <!-- :class="currentImg === 0 ? 'active' : '' " -->
+
+                    <!-- <div class="thumb">   [:class="currentImg === 0 ? 'active' : '' "]
                         <img src="img/01.webp" alt="Svezia" />
                     </div>
                     <div class="thumb">
@@ -63,7 +81,7 @@
                     </div>
                     <div class="thumb">
                         <img src="img/05.webp" alt="Avengers" />
-                    </div>
+                    </div> -->
                 </div>
 
             </div>

@@ -7,8 +7,8 @@ const { createApp } = Vue
 createApp({
   data() {
     return {
-      currentImg: 0,
-      active: 'active',
+      currentImg: 0,  // indice di partenza
+      intervalTime: null,  // tempo di riferimento
       slides:
         [
             {
@@ -43,7 +43,19 @@ createApp({
         ],
     }
   },
+
+  mounted(){
+    this.intervalTime = setInterval(()=>{
+        if(this.currentImg !== this.slides.length - 1){
+            this.currentImg++
+        } else {
+            this.currentImg = 0
+        }
+    }, 2000)
+  },
+
   methods:{
+    // funzione per l'evento al click sullo pseudo-pulsante "prev"
     prev(){
         this.currentImg--
         if(this.currentImg < 0){
@@ -53,6 +65,7 @@ createApp({
         }
     },
 
+    // funzione per l'evento al click sullo pseudo-pulsante "next"
     next(){
         this.currentImg++
         if(this.currentImg > 4){
@@ -61,6 +74,26 @@ createApp({
             
         }
     },
+
+    // funzione per l'evento al mouse sull'immagine (@mouseleave)
+    startCarousel(){
+        this.intervalTime = setInterval(()=>{
+            if(this.currentImg !== this.slides.length - 1){
+                this.currentImg++
+            } else {
+                this.currentImg = 0
+            }
+        }, 2000)
+    },
+
+    // funzione per l'evento al mouse sull'immagine (@mouseover)
+    stopCarousel(){
+            if(this.currentImg !== null){
+                clearInterval(this.intervalTime)
+                intervalTime = null
+            }
+            
+    }
   }
 
 
