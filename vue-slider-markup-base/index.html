@@ -20,9 +20,12 @@
                 <!-- prendo la singola immagine nell'array di oggetti "slides" in Js
                      mediante la chiave in data "currentImg" a cui è stato assegnato 0 come
                      valore di partenza (che corrisponde all'indice di riferimento) -->
-
-                <div class="item">
-                    <img v-bind:src="slides[currentImg].image" alt="Spiderman" />
+                <!-- assegno l'evento al passaggio del mouse (@mouseover/@mouseleave)
+                     per far scorrere in autoplay e bloccare le immagini -->    
+                <div class="item"
+                    @mouseover="stopCarousel()"  
+                    @mouseleave="startCarousel()">
+                    <img v-bind:src="slides[currentImg].image" v-bind:alt="slides[currentImg].title" />
                     <div class="text">
                         <h3>
                             <!-- assegno ad ogni image selezionata il rispettivo titolo -->
@@ -39,8 +42,7 @@
                      per far scorrere in autoplay e bloccare le immagini -->
                 <div class="thumbs"
                     @mouseover="stopCarousel()"  
-                    @mouseleave="startCarousel()"
-                >
+                    @mouseleave="startCarousel()">
                     
                     <!-- assegno l'eventListener "@click" allo pseudo-pulsante per indicare di scorrere l'image -->
                     <!-- <div class="prev" @click="currentImg--"></div> -->
@@ -63,7 +65,7 @@
                         :class="currentImg === i ? 'active' : ''"
                         v-for="(img, i) in slides"    
                     >
-                        <img v-bind:src="img.image" alt="">
+                        <img v-bind:src="img.image" v-bind:alt="slides[currentImg].title">
                     </div>
 
 

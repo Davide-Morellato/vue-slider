@@ -45,13 +45,7 @@ createApp({
   },
 
   mounted(){
-    this.intervalTime = setInterval(()=>{
-        if(this.currentImg !== this.slides.length - 1){
-            this.currentImg++
-        } else {
-            this.currentImg = 0
-        }
-    }, 2000)
+    this.startCarousel()
   },
 
   methods:{
