@@ -1,75 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src='https://unpkg.com/vue@3/dist/vue.global.js'></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <link rel="stylesheet" href="./css/style.css" />
     <title>Slider</title>
-   
-</head>
+  </head>
 
-<body>
-
+  <body>
     <div id="app">
-        <div class="container">
-            <div class="slider-wrapper" tabindex="0">
-
-                <!-- prendo la singola immagine nell'array di oggetti "slides" in Js
+      <div class="container">
+        <div class="slider-wrapper" tabindex="0">
+          <!-- prendo la singola immagine nell'array di oggetti "slides" in Js
                      mediante la chiave in data "currentImg" a cui è stato assegnato 0 come
                      valore di partenza (che corrisponde all'indice di riferimento) -->
-                <!-- assegno l'evento al passaggio del mouse (@mouseover/@mouseleave)
-                     per far scorrere in autoplay e bloccare le immagini -->    
-                <div class="item"
-                    @mouseover="stopCarousel()"  
-                    @mouseleave="startCarousel()">
-                    <img v-bind:src="slides[currentImg].image" v-bind:alt="slides[currentImg].title" />
-                    <div class="text">
-                        <h3>
-                            <!-- assegno ad ogni image selezionata il rispettivo titolo -->
-                            {{slides[currentImg].title}}
-                        </h3>
-                        <p>
-                            <!-- assegno ad ogni image selezionata la rispettiva descrizione -->
-                            {{slides[currentImg].text}}
-                        </p>
-                    </div>
-                </div>
-
-                <!-- assegno l'evento al passaggio del mouse (@mouseover/@mouseleave)
+          <!-- assegno l'evento al passaggio del mouse (@mouseover/@mouseleave)
                      per far scorrere in autoplay e bloccare le immagini -->
-                <div class="thumbs"
-                    @mouseover="stopCarousel()"  
-                    @mouseleave="startCarousel()">
-                    
-                    <!-- assegno l'eventListener "@click" allo pseudo-pulsante per indicare di scorrere l'image -->
-                    <!-- <div class="prev" @click="currentImg--"></div> -->
+          <div
+            class="item"
+            @mouseover="stopCarousel()"
+            @mouseleave="startCarousel()"
+          >
+            <img
+              v-bind:src="slides[currentImg].image"
+              v-bind:alt="slides[currentImg].title"
+            />
+            <div class="text">
+              <h3>
+                <!-- assegno ad ogni image selezionata il rispettivo titolo -->
+                {{slides[currentImg].title}}
+              </h3>
+              <p>
+                <!-- assegno ad ogni image selezionata la rispettiva descrizione -->
+                {{slides[currentImg].text}}
+              </p>
+            </div>
+          </div>
 
-                    <!-- applico la funzione creata in methods in Js [successivo a data()]-->
-                    <div class="prev" v-on:click="prev()"></div>
+          <!-- assegno l'evento al passaggio del mouse (@mouseover/@mouseleave)
+                     per far scorrere in autoplay e bloccare le immagini -->
+          <div
+            class="thumbs"
+            @mouseover="stopCarousel()"
+            @mouseleave="startCarousel()"
+          >
+            <!-- assegno l'eventListener "@click" allo pseudo-pulsante per indicare di scorrere l'image -->
+            <!-- <div class="prev" @click="currentImg--"></div> -->
 
-                    <!-- assegno l'eventListener "@click" allo pseudo-pulsante per indicare di scorrere l'image -->
-                    <!-- <div class="next" @click="currentImg++"></div> -->
+            <!-- applico la funzione creata in methods in Js [successivo a data()]-->
+            <div class="prev" v-on:click="prev()"></div>
 
-                    <!-- applico la funzione creata in methods in Js [successivo a data()]-->
-                    <div class="next" @click="next()"></div>
-                    
-                    <!-- creo un div in cui inserire le immagini prese dall'array "slides" 
+            <!-- assegno l'eventListener "@click" allo pseudo-pulsante per indicare di scorrere l'image -->
+            <!-- <div class="next" @click="currentImg++"></div> -->
+
+            <!-- applico la funzione creata in methods in Js [successivo a data()]-->
+            <div class="next" @click="next()"></div>
+
+            <!-- creo un div in cui inserire le immagini prese dall'array "slides" 
                          indico che al click sull'immagine della thumb essa cambi 
                          assegno/rimuovo la classe active al cambio dell'immagine (riquadro)
                          applico la direttiva v-for per visualizzare le immagini dell' array -->
-                    <div class="thumb"
-                        @click="currentImg = i"
-                        :class="currentImg === i ? 'active' : ''"
-                        v-for="(img, i) in slides"    
-                    >
-                        <img v-bind:src="img.image" v-bind:alt="slides[currentImg].title">
-                    </div>
+            <div
+              class="thumb"
+              @click="currentImg = i"
+              :class="currentImg === i ? 'active' : ''"
+              v-for="(img, i) in slides"
+            >
+              <img
+                v-bind:src="img.image"
+                v-bind:alt="slides[currentImg].title"
+              />
+            </div>
 
-
-                    <!-- <div class="thumb">   [:class="currentImg === 0 ? 'active' : '' "]
+            <!-- <div class="thumb">   [:class="currentImg === 0 ? 'active' : '' "]
                         <img src="img/01.webp" alt="Svezia" />
                     </div>
                     <div class="thumb">
@@ -84,14 +89,19 @@
                     <div class="thumb">
                         <img src="img/05.webp" alt="Avengers" />
                     </div> -->
-                </div>
-
-            </div>
+          </div>
         </div>
+      </div>
+
+      <!-- aggiunta di un bottone per cambiare la direzione allo slider -->
+      <div class="container">
+        <!-- evento di click per il cambio di direzione -->
+        <button class="btn" v-on:click="changeDirection">
+          Change Direction
+        </button>
+      </div>
     </div>
 
-    
     <script src="./js/script.js"></script>
-</body>
-
+  </body>
 </html>

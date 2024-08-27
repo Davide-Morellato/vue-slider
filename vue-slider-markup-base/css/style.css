@@ -4,8 +4,17 @@
     box-sizing: border-box;
 }
 
-.container {
+#app{
     height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+}
+
+.container {
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -102,4 +111,15 @@ oppure i caratteri ∧ (&and;) e ∨ (&or;)
     bottom: 35%;
     left: 50%;
     transform: translate(-50%) rotate(135deg);
+}
+
+.btn{
+    line-height: 40px;
+    padding: 0 24px;
+    border-radius: 999px;
+    background-color: firebrick;
+    color: white;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
 }
